@@ -13,8 +13,6 @@ docker run gusdecool/send-portal:3.0.1
 Then run the database migration to create the required tables.  
 Finally, finalize the SendPortal setup by visiting: http://localhost:6101/setup
 
-```shell
-
 ## How to build the docker image
 clone the repo with specified tag
 ```shell
