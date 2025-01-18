@@ -1,8 +1,10 @@
-# SendPortal with Docker 
+# SendPortal with Docker
 
 ## How to use the docker image
 Run the docker image with the environment variables as specified in docker-compose.yml file. You will need to adjust 
 the environment to follow your own server configuration.
+
+Docker image public repository: https://hub.docker.com/r/gusdecool/send-portal
 
 ```shell
 docker run gusdecool/send-portal:3.0.1
