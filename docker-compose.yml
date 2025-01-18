@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gusdecool/send-portal:3.0.1
+    environment:
+      APP_NAME: SendPortal
+      APP_ENV: prod
+      APP_KEY: base64:k0bMmfX27y2gd3K66m6DbpEQJsPPTTLv8SmxWJBh9uE= # put any base64 key here
+      APP_DEBUG: true # change this to false in production
+      APP_URL: http://localhost:6101 # change this to your domain
+      LOG_CHANNEL: stack
+
+      # these db connection is using docker compose service name. In prod, use your credentials
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: app
+      DB_USERNAME: root
+      DB_PASSWORD: root_pass
+
+      # SendPortal specific configurations
+      SENDPORTAL_THROTTLE_MIDDLEWARE: 60,1
+      SENDPORTAL_REGISTER: true
+      SENDPORTAL_PASSWORD_RESET: true
+
+      # optional, for local debugging
+      PHP_IDE_CONFIG: "serverName=send-portal"
+    ports:
+      - "6101:80"
+  db:
+    image: library/mysql:8.0
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "6100:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pass
+      - MYSQL_DATABASE=app
+volumes:
+  db_data:
